@@ -41,7 +41,7 @@ pipeline {
 	stage('Create Infrastructure using terraform') {
 	     steps {
 		dir('scripts') {
-			withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jenkinsIAMuser', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+			withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'JenkinsIAMuser', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
 			sh 'terraform init'
 			sh 'terraform validate'
 			sh 'terraform apply --auto-approve -lock=false'
