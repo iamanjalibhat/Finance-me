@@ -22,7 +22,7 @@ resource "aws_instance" "deploy-server" {
   key_name = "finance-me-key"
   vpc_security_group_ids= ["sg-090308876f85665e4"]
   tags = {
-    Name = "Deploy-server"
+    Name = "deploy-server"
   }
   connection {
     type     = "ssh"
@@ -34,9 +34,9 @@ resource "aws_instance" "deploy-server" {
     inline = [ "echo 'wait to start instance' "]
   }
   provisioner "local-exec" {
-        command = " echo ${aws_instance.test-server.public_ip} > inventory "
+        command = " echo ${aws_instance.deploy-server.public_ip} > inventory "
   }
    provisioner "local-exec" {
-   command = "ansible-playbook /var/lib/jenkins/workspace/Banking/scripts/finance-me-playbook.yaml"
+   command = "ansible-playbook /var/lib/jenkins/workspace/Finance-me/scripts/finance-me-playbook.yaml"
   } 
 }
