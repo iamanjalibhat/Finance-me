@@ -1,0 +1,19 @@
+
+- name: Configure Docker on Deploy server Instance
+  hosts: all
+  become: true
+  tasks:
+    - name: Updating apt
+      apt:
+        update_cache: yes
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Start Docker Service
+      shell: systemctl start docker
+
+    - name: Run the Bank application
+      command: sudo docker run -itd -p 8085:8081 anjalibhat/finance-me-app:latest
