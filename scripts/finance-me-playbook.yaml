@@ -4,16 +4,13 @@
   become: true
   tasks:
     - name: Updating apt
-      apt:
-        update_cache: yes
+      command: sudo apt update -y
 
     - name: Install Docker
-      apt:
-        name: docker.io
-        state: present
+      command: sudo apt install docker.io -y 
 
     - name: Start Docker Service
-      shell: systemctl start docker
+      command: systemctl start docker
 
     - name: Run the Bank application
       command: sudo docker run -itd -p 8085:8081 anjalibhat/finance-me-app:latest
